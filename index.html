@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d111e">
+  <meta name="description" content="Danh sách bộ sưu tập thiệp tương tác lãng mạn - Thiệp 3, Thiệp 4 & Thiệp 5">
+  <title>Bộ Sưu Tập Thiệp Tương Tác 💖</title>
+
+  <style>
+    /* CSS RESET & VARIABLES */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #0b0e17;
+      --card-bg: rgba(22, 28, 45, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-main: #f0f4fc;
+      --text-sub: #a1b0cb;
+      --text-muted: #6b7a99;
+      --accent-gold: #e5b567;
+      --accent-rose: #f1829d;
+      --accent-blue: #63a4ff;
+      --accent-purple: #9d7cf7;
+      --shadow-ambient: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #171b30 0%, #0b0e17 80%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 60px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* BACKGROUND PARTICLES/GLOW */
+    .ambient-glow {
+      position: fixed;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(157, 124, 247, 0.18) 0%, rgba(241, 130, 157, 0.1) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .badge-collection {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #dfd8f5;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 30%, #e0d0f8 70%, #fbd5df 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: clamp(15px, 2.5vw, 17px);
+      color: var(--text-sub);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* CARDS GRID */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      width: 100%;
+      margin-bottom: 50px;
+    }
+
+    /* INDIVIDUAL CARD ITEM */
+    .card-item {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-ambient);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      overflow: hidden;
+    }
+
+    .card-item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 255, 255, 0.24);
+      box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Card Themes */
+    .card-item.theme-thiep3::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #c6923b, #f1a8c1, #8a2828);
+    }
+
+    .card-item.theme-thiep4::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #63a4ff, #9d7cf7, #f1829d);
+    }
+
+    .card-item.theme-thiep5::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #c9ac9d, #f8a5c2, #bc1948);
+    }
+
+    /* Card Top */
+    .card-top {
+      margin-bottom: 24px;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .card-number {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border-radius: 8px;
+      text-transform: uppercase;
+    }
+
+    .theme-thiep3 .card-number {
+      background: rgba(198, 146, 59, 0.15);
+      color: #f7d28b;
+      border: 1px solid rgba(198, 146, 59, 0.3);
+    }
+
+    .theme-thiep4 .card-number {
+      background: rgba(157, 124, 247, 0.15);
+      color: #cfbeff;
+      border: 1px solid rgba(157, 124, 247, 0.3);
+    }
+
+    .theme-thiep5 .card-number {
+      background: rgba(188, 25, 72, 0.15);
+      color: #fca5bb;
+      border: 1px solid rgba(188, 25, 72, 0.3);
+    }
+
+    .card-folder {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+
+    .card-icon {
+      font-size: 40px;
+      margin-bottom: 14px;
+      display: inline-block;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 14.5px;
+      color: var(--text-sub);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    /* Feature Pills */
+    .pills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cfd8e8;
+    }
+
+    /* Actions */
+    .card-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .btn-launch {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .theme-thiep3 .btn-launch {
+      background: linear-gradient(135deg, #c6923b 0%, #aa6d24 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(198, 146, 59, 0.35);
+    }
+    .theme-thiep3 .btn-launch:hover {
+      box-shadow: 0 6px 22px rgba(198, 146, 59, 0.5);
+      filter: brightness(1.08);
+    }
+
+    .theme-thiep4 .btn-launch {
+      background: linear-gradient(135deg, #7c4dff 0%, #448aff 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(124, 77, 255, 0.35);
+    }
+    .theme-thiep4 .btn-launch:hover {
+      box-shadow: 0 6px 22px rgba(124, 77, 255, 0.5);
+      filter: brightness(1.08);
+    }
+
+    .theme-thiep5 .btn-launch {
+      background: linear-gradient(135deg, #b43750 0%, #8c5863 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(180, 55, 80, 0.35);
+    }
+    .theme-thiep5 .btn-launch:hover {
+      box-shadow: 0 6px 22px rgba(180, 55, 80, 0.5);
+      filter: brightness(1.08);
+    }
+
+    .btn-external {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-external:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* GUIDE & SETTINGS SECTION */
+    .guide-box {
+      width: 100%;
+      background: rgba(16, 21, 35, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      padding: 26px 28px;
+      margin-top: 10px;
+    }
+
+    .guide-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #e5b567;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .guide-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-sub);
+    }
+
+    .guide-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .guide-list code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      color: #ffd1ae;
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 680px) {
+      body {
+        padding: 30px 16px 40px;
+      }
+      .card-item {
+        padding: 24px 20px;
+      }
+      .cards-grid {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <div class="container">
+    <header>
+      <div class="badge-collection">✨ Interactive Romantic Cards</div>
+      <h1>Bộ Sưu Tập Thiệp Tương Tác</h1>
+      <p class="subtitle">Mỗi tấm thiệp là một trải nghiệm độc bản, hoạt động hoàn toàn độc lập và không phụ thuộc vào nhau.</p>
+    </header>
+
+    <div class="cards-grid">
+      <!-- CARD 3 -->
+      <article class="card-item theme-thiep3">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="card-number">Thiệp 03</span>
+            <span class="card-folder">thiep-3/index.html</span>
+          </div>
+          <div class="card-icon">🎟️</div>
+          <h2 class="card-title">Một Tấm Vé Hẹn Hò ♡</h2>
+          <p class="card-desc">
+            Phong cách vintage cổ điển ấm áp. Cho phép người thương tự tay lựa chọn ngày giờ, địa điểm, món ngon và hoạt động yêu thích, sau đó xuất chiếc vé tình yêu độc bản với mã vạch và dấu mộc lưu niệm.
+          </p>
+          <div class="pills-list">
+            <span class="pill">📜 Tone Giấy Cũ Vintage</span>
+            <span class="pill">📅 Chọn Lịch & Địa Điểm</span>
+            <span class="pill">🎫 Xuất Vé Kỷ Niệm PNG</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="./thiep-3/index.html" class="btn-launch">
+            <span>Mở Thiệp 3</span>
+            <span>➔</span>
+          </a>
+          <a href="./thiep-3/index.html" target="_blank" rel="noopener" class="btn-external" title="Mở trong tab mới">
+            ↗
+          </a>
+        </div>
+      </article>
+
+      <!-- CARD 4 -->
+      <article class="card-item theme-thiep4">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="card-number">Thiệp 04</span>
+            <span class="card-folder">thiep-4/index.html</span>
+          </div>
+          <div class="card-icon">🪐</div>
+          <h2 class="card-title">Gửi Em Một Vũ Trụ ✨</h2>
+          <p class="card-desc">
+            Hành trình không gian 7 cảnh đầy ma mị: bắt đầu từ ngôi sao phát tín hiệu, câu hỏi với nút né tinh nghịch cực gắt, xuyên cổng sao tốc độ cao, gom sao thành trái tim, mở phong bì sáp và nhận tọa độ vũ trụ riêng.
+          </p>
+          <div class="pills-list">
+            <span class="pill">🏃 Nút Né Siêu Tinh Nghịch</span>
+            <span class="pill">🌌 Xuyên Cổng Sao Warp</span>
+            <span class="pill">💌 Mở Bì Thư Sáp 3D</span>
+            <span class="pill">🌠 Xuất Ảnh Tọa Độ Sao</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="./thiep-4/index.html" class="btn-launch">
+            <span>Mở Thiệp 4</span>
+            <span>➔</span>
+          </a>
+          <a href="./thiep-4/index.html" target="_blank" rel="noopener" class="btn-external" title="Mở trong tab mới">
+            ↗
+          </a>
+        </div>
+      </article>
+
+      <!-- CARD 5 -->
+      <article class="card-item theme-thiep5">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="card-number">Thiệp 05</span>
+            <span class="card-folder">thiep-5.html</span>
+          </div>
+          <div class="card-icon">💌</div>
+          <h2 class="card-title">Thiệp 5 – Phong thư vườn hoa</h2>
+          <p class="card-desc">
+            Mở lá thư, ngắm hoa bay và những kỷ niệm của hai đứa. Luồng trải nghiệm đầy đủ: mã PIN khóa trái tim, mở phong thư rút thiệp 3D, đọc tâm thư gõ từng ký tự và ngắm ảnh kỷ niệm bay vào vòng hoa trái tim.
+          </p>
+          <div class="pills-list">
+            <span class="pill">🌸 Mưa Hoa &amp; Vòng Hoa Tim</span>
+            <span class="pill">💌 Mở Thư &amp; Lật Bìa 3D</span>
+            <span class="pill">📸 Ảnh Kỷ Niệm Bay Nghệ Thuật</span>
+            <span class="pill">🔒 Khóa Trái Tim &amp; Mã PIN</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="./thiep-5.html" class="btn-launch">
+            <span>Mở Thiệp 5</span>
+            <span>➔</span>
+          </a>
+          <a href="./thiep-5.html" target="_blank" rel="noopener" class="btn-external" title="Mở trong tab mới">
+            ↗
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <!-- GUIDE BOX -->
+    <section class="guide-box">
+      <h3 class="guide-title">
+        <span>💡</span> Cấu trúc thư mục & Tùy biến
+      </h3>
+      <ul class="guide-list">
+        <li>
+          <span>📁</span>
+          <span><strong>Độc lập hoàn toàn:</strong> Mỗi thiệp nằm trong 1 folder hoặc file riêng (<code>thiep-3/index.html</code>, <code>thiep-4/index.html</code> và <code>thiep-5.html</code>), tự chứa 100% CSS, JS, Canvas và font. Không cần CDN hay internet.</span>
+        </li>
+        <li>
+          <span>⚙️</span>
+          <span><strong>Chỉnh sửa nội dung:</strong> Mở file <code>index.html</code> bên trong từng thư mục thiệp và sửa trực tiếp biến <code>CONFIG</code> ở đầu thẻ <code>&lt;script&gt;</code> (tên người gửi, người nhận, lời chúc, tọa độ...).</span>
+        </li>
+        <li>
+          <span>📱</span>
+          <span><strong>Hỗ trợ đa nền tảng:</strong> Tối ưu hoàn hảo cho cả máy tính (chuột né mượt mà) và điện thoại di động (cảm ứng chạm né tức thì).</span>
+        </li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>Trải nghiệm thiệp tương tác độc bản • Tự động lưu &amp; xuất ảnh kỷ niệm</p>
+    </footer>
+  </div>
+</body>
+</html>
