@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#090205">
+  <meta name="description" content="Thiệp 8 — Vũ trụ trái tim, phong thư 3D và ảnh kỷ niệm bay lãng mạn">
+  <title>Thiệp 8 — Vũ Trụ Trái Tim &amp; Bì Thư 3D 💖</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+  <link rel="stylesheet" href="../assets/thiep-8/css/thiep-8.css">
+</head>
+<body>
+  <div id="thiep-8-app" class="thiep-8">
+    <!-- SCENE 1: UNIVERSE (3D VOLUMETRIC HEART & ORBIT SYSTEM) -->
+    <section class="universe-scene" aria-label="Vũ trụ trái tim sao">
+      <canvas class="universe-canvas"></canvas>
+      <button class="heart-hotspot" type="button" aria-label="Mở món quà" title="Mở món quà"></button>
+    </section>
+
+    <!-- FLASH OVERLAY (TRANSITION WORLD 1 -> WORLD 2) -->
+    <div class="flash-overlay" aria-hidden="true"></div>
+
+    <!-- SCENE 2: WORLD 2 (ENVELOPE, 3D CARD, FLOATING HEARTS) -->
+    <div class="envelope-world" aria-label="Phong thư kỷ niệm">
+      <!-- Background Floating Hearts (Pre-populated) -->
+      <div class="floating-hearts-layer" aria-hidden="true"></div>
+
+      <!-- Envelope Stage in lower screen area (y = 66–89%) -->
+      <div class="envelope-stage">
+        <div class="envelope-container" tabindex="0" role="button" aria-label="Mở phong thư">
+          <div class="envelope-shadow"></div>
+          <div class="envelope-back"></div>
+          
+          <!-- Top Fold Triangular Flap -->
+          <div class="envelope-flap-top">
+            <div class="flap-triangle"></div>
+          </div>
+
+          <!-- Vertical Card Inside Pocket (Aspect Ratio ~0.74) -->
+          <div class="card-trans-wrapper">
+            <div class="card-book-assembly">
+              <!-- Inside Right Page -->
+              <div class="card-leaf-right">
+                <div class="card-preview-text"></div>
+              </div>
+
+              <!-- Spine Hinge Left Leaf (Book cover opens rotateY 0 -> -150deg) -->
+              <div class="card-leaf-left">
+                <!-- Outer Cover Face -->
+                <div class="leaf-face front">
+                  <span class="cover-eyebrow">DEAR</span>
+                  <span class="cover-title">My Love</span>
+                  <span class="cover-heart">♥</span>
+                </div>
+                <!-- Inner Face with User Photo -->
+                <div class="leaf-face back">
+                  <div class="inner-photo-frame">
+                    <img class="inner-photo-img" src="../assets/thiep-8/images/photo-01.svg" alt="Ảnh người nhận">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Envelope Front Pocket Triangles -->
+          <div class="envelope-pocket-front">
+            <div class="pocket-side-left"></div>
+            <div class="pocket-side-right"></div>
+            <div class="pocket-bottom"></div>
+          </div>
+
+          <!-- Pink Wax Seal Heart -->
+          <div class="wax-seal" title="Mở thư" aria-hidden="true"></div>
+        </div>
+
+        <div class="envelope-hint">Nhấn vào thư để mở 💌</div>
+      </div>
+
+      <!-- SCENE 3: READING MODAL PANEL -->
+      <div class="reading-backdrop" aria-hidden="true"></div>
+      <div class="reading-panel" role="dialog" aria-modal="true" aria-label="Bảng thư tình yêu">
+        <button class="btn-close-letter" type="button" aria-label="Đóng thư" title="Đóng thư">
+          <span class="close-circle">×</span>
+        </button>
+
+        <div class="reading-body">
+          <!-- A. Portrait photo (58–62% width, no caption/badge) -->
+          <div class="modal-photo-wrap">
+            <img class="modal-photo-img" src="../assets/thiep-8/images/photo-01.svg" alt="Ảnh người nhận">
+          </div>
+
+          <!-- B. Greeting message with stable height reservation -->
+          <div class="letter-text-box">
+            <div class="ghost-message" aria-hidden="true"></div>
+            <div class="typed-message" aria-live="polite"></div>
+          </div>
+
+          <!-- C. Beating Red Heart (25–30px, pink glow, slow pulse) -->
+          <div class="modal-beating-heart" aria-hidden="true">💖</div>
+        </div>
+      </div>
+
+      <!-- SCENE 4: GALLERY (FLOATING MEMORY PHOTOS) -->
+      <div class="gallery-container" aria-label="Ảnh kỷ niệm bay"></div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="../assets/thiep-8/js/config.js"></script>
+  <script src="../assets/thiep-8/js/universe.js"></script>
+  <script src="../assets/thiep-8/js/letter.js"></script>
+  <script src="../assets/thiep-8/js/gallery.js"></script>
+  <script src="../assets/thiep-8/js/main.js"></script>
+</body>
+</html>
