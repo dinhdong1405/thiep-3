@@ -2222,7 +2222,7 @@ if (typeof window !== 'undefined') {
 
       // Bind user portrait photo
       const primaryIndex = this.config.primaryPhotoIndex || 0;
-      const primaryPhoto = (this.config.photos && this.config.photos[primaryIndex]) || { src: './assets/thiep-8/images/photo-01.svg' };
+      const primaryPhoto = (this.config.photos && this.config.photos[primaryIndex]) || (this.config.photos && this.config.photos[0]) || { src: '' };
 
       const innerPhoto = this.root.querySelector('.inner-photo-img');
       if (innerPhoto) {
